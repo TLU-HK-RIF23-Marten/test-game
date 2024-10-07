@@ -5,10 +5,8 @@ const island = document.getElementById('island');
 const ctx = canvas.getContext('2d');
 
 let waves = [];
-
-// Mängija liikumismuutujad
 let isMoving = { left: false, right: false, up: false, down: false };
-let speed = 5; // Mängija liikumiskiirus
+let speed = 5;
 
 // Suuruse kohandamine
 const resizeCanvas = () => {
@@ -29,8 +27,8 @@ let lifeboatPosition = { x: canvas.width / 3, y: canvas.height / 2 };
 
 // Funktsioon mängija liigutamiseks klaviatuuriga
 const movePlayerWithKeyboard = () => {
-    let newX = parseFloat(player.style.left || 120);
-    let newY = parseFloat(player.style.top || 120);
+    let newX = parseFloat(player.style.left || 150);
+    let newY = parseFloat(player.style.top || 150);
 
     // Liigume vastavalt klahvidele
     if (isMoving.left) {
@@ -61,7 +59,7 @@ const movePlayerWithKeyboard = () => {
     player.style.top = `${newY}px`;
 
     // Loome laine liikumisel
-    createWave(newX + player.width / 5, newY + player.height / 5);
+    createWave(newX + player.width / 2, newY + player.height / 2);
 };
 
 // Klaviatuuri sündmused liikumiseks
@@ -119,11 +117,12 @@ const updateLifeboatPosition = () => {
         lifeboat.style.transform = `rotate(${angle - 90}deg)`;
     }
 
-    // Kontrollime, et paat ei läheks väljapoole canvas't
-    if (lifeboatPosition.x < 100) lifeboatPosition.x = 100;
-    if (lifeboatPosition.x + lifeboat.width > canvas.width) lifeboatPosition.x = canvas.width - lifeboat.width;
-    if (lifeboatPosition.y < 100) lifeboatPosition.y = 100;
-    if (lifeboatPosition.y + lifeboat.height > canvas.height) lifeboatPosition.y = canvas.height - lifeboat.height;
+    const margin = 30;
+
+    if (lifeboatPosition.x < margin) lifeboatPosition.x = margin;
+    if (lifeboatPosition.x + lifeboat.width > canvas.width - margin) lifeboatPosition.x = canvas.width - lifeboat.width - margin;
+    if (lifeboatPosition.y < margin) lifeboatPosition.y = margin;
+    if (lifeboatPosition.y + lifeboat.height > canvas.height - margin) lifeboatPosition.y = canvas.height - lifeboat.height - margin;
 
     lifeboat.style.left = `${lifeboatPosition.x}px`;
     lifeboat.style.top = `${lifeboatPosition.y}px`;
@@ -145,9 +144,30 @@ const checkWinCondition = () => {
       lifeboatRect.y + lifeboatRect.height > islandRect.y + padding
   ) {
       alert('Sa jõudsid saarele!');
-      lifeboatPosition = { x: canvas.width / 2, y: canvas.height - 30 };
+      
+      resetGame();
   }
 };
+
+const resetGame = () => {
+  // Taastame mängija algse asukoha
+  player.style.left = '150px';
+  player.style.top = '150px';
+  player.style.transform = 'rotate(0deg)';  // Mängija algne suund
+
+  // Taastame paadi algse asukoha
+  lifeboatPosition = { x: canvas.width / 3, y: canvas.height / 2 };
+  lifeboat.style.left = `${lifeboatPosition.x}px`;
+  lifeboat.style.top = `${lifeboatPosition.y}px`;
+
+  // Tühjendame lainete massiivi
+  waves = [];
+
+  // Võib-olla lisada ka muid algseadeid, nagu mängu kiirus või muud parameetrid
+  speed = 5;
+  isMoving = { left: false, right: false, up: false, down: false };
+};
+
 
 // Lainete joonistamine
 const drawWaves = () => {
@@ -177,5 +197,5 @@ const gameLoop = () => {
   requestAnimationFrame(gameLoop); // Kutsu gameLoop uuesti
 };
 
-// Algatame mängu põhitsükli
+resetGame();
 gameLoop();

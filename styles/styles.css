@@ -24,7 +24,6 @@ canvas {
   cursor: pointer;
   top: 25%;
   left: 25%;
-  transform: translate(-50%, -50%);
   z-index: 10;
 }
 
