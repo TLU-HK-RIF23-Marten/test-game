@@ -25,7 +25,6 @@ canvas {
   top: 25%;
   left: 25%;
   transform: translate(-50%, -50%);
-  border: 1px solid black;
   z-index: 10;
 }
 
@@ -35,7 +34,6 @@ canvas {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10;
-  border: 1px solid black;
 }
 
 #island {

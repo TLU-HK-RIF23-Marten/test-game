@@ -29,8 +29,8 @@ let lifeboatPosition = { x: canvas.width / 3, y: canvas.height / 2 };
 
 // Funktsioon mängija liigutamiseks klaviatuuriga
 const movePlayerWithKeyboard = () => {
-    let newX = parseFloat(player.style.left || 100);
-    let newY = parseFloat(player.style.top || 100);
+    let newX = parseFloat(player.style.left || 120);
+    let newY = parseFloat(player.style.top || 120);
 
     // Liigume vastavalt klahvidele
     if (isMoving.left) {
@@ -61,7 +61,7 @@ const movePlayerWithKeyboard = () => {
     player.style.top = `${newY}px`;
 
     // Loome laine liikumisel
-    createWave(newX + player.width / 2, newY + player.height / 2);
+    createWave(newX + player.width / 5, newY + player.height / 5);
 };
 
 // Klaviatuuri sündmused liikumiseks
@@ -114,6 +114,9 @@ const updateLifeboatPosition = () => {
         // Muudame suunda: paat liigub mängijast eemale
         lifeboatPosition.x -= (dx / distance) * 5;
         lifeboatPosition.y -= (dy / distance) * 5;
+
+        const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+        lifeboat.style.transform = `rotate(${angle - 90}deg)`;
     }
 
     // Kontrollime, et paat ei läheks väljapoole canvas't
@@ -133,15 +136,17 @@ const checkWinCondition = () => {
     const islandRect = island.getBoundingClientRect();
     const lifeboatRect = lifeboat.getBoundingClientRect();
 
+    const padding = 50;
+
     if (
-        lifeboatRect.x < islandRect.x + islandRect.width &&
-        lifeboatRect.x + lifeboatRect.width > islandRect.x &&
-        lifeboatRect.y < islandRect.y + islandRect.height &&
-        lifeboatRect.y + lifeboatRect.height > islandRect.y
-    ) {
-        alert('Sa jõudsid saarele!');
-        lifeboatPosition = { x: canvas.width / 2, y: canvas.height - 30 };
-    }
+      lifeboatRect.x < islandRect.x + islandRect.width - padding &&
+      lifeboatRect.x + lifeboatRect.width > islandRect.x + padding &&
+      lifeboatRect.y < islandRect.y + islandRect.height - padding &&
+      lifeboatRect.y + lifeboatRect.height > islandRect.y + padding
+  ) {
+      alert('Sa jõudsid saarele!');
+      lifeboatPosition = { x: canvas.width / 2, y: canvas.height - 30 };
+  }
 };
 
 // Lainete joonistamine
