@@ -3,17 +3,42 @@ const canvas = document.getElementById('canvas');
 const player = document.getElementById('player');
 const lifeboat = document.getElementById('lifeboat');
 const island = document.getElementById('island');
+const timeLeft = document.getElementsByClassName('timeLeft');
+const pointsBox = document.getElementsByClassName('pointsBox');
 const ctx = canvas.getContext('2d');
 
 let waves = [];
 let isMoving = { left: false, right: false, up: false, down: false };
 let speed = 5;
 let points = 0;
+let time = 120;
+let timerInterval;
 
 
-intro.addEventListener('click', () => {
+document.getElementById('play').addEventListener('click', () => {
   intro.style.top = '-1000px';
+
+  // Käivitame taimeri
+  timerInterval = setInterval(updateTimer, 1000);
 });
+
+const updateTimer = () => {
+  if (time > 0) {
+      time--;
+      const minutes = Math.floor(time / 60);
+      const seconds = time % 60;
+      document.getElementById('time').textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  } else {
+      clearInterval(timerInterval); // Peatame taimeri, kui aeg otsas
+      alert('Aeg on läbi!');
+      resetGame();
+  }
+};
+
+const updatePoints = (newPoints) => {
+  points = newPoints;
+  document.getElementById('points').textContent = points;
+};
 
 // Suuruse kohandamine
 const resizeCanvas = () => {
@@ -150,13 +175,19 @@ const checkWinCondition = () => {
       lifeboatRect.y < islandRect.y + islandRect.height - padding &&
       lifeboatRect.y + lifeboatRect.height > islandRect.y + padding
   ) {
-      alert('Sa jõudsid saarele!');
+      clearInterval(timerInterval); // Peatame taimeri, kui mängija jõuab saarele
+      alert(`Sa jõudsid saarele! Sinu aeg oli! Sa said 1000 punkti!`);
+      updatePoints(1000);
       
       resetGame();
   }
 };
 
 const resetGame = () => {
+
+  time = 120;
+  updatePoints(0);
+  document.getElementById('time').textContent = '2:00';  
   // Taastame mängija algse asukoha
   player.style.left = '150px';
   player.style.top = '150px';

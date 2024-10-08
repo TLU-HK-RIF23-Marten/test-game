@@ -70,6 +70,35 @@ canvas {
   transition: 0.8s ease-in-out;
 }
 
+.timePoints {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  width: 150px;
+  height: 100px;
+  padding: 10px;
+  color: white;
+  font-size: 25px;
+}
+
+.timeLeft {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.pointsBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
 .playContainer {
   height: 100%;
   display: flex;
