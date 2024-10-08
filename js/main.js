@@ -5,6 +5,13 @@ const lifeboat = document.getElementById('lifeboat');
 const island = document.getElementById('island');
 const timeLeft = document.getElementsByClassName('timeLeft');
 const pointsBox = document.getElementsByClassName('pointsBox');
+const questionOneIcon = document.getElementById('questionOneIcon');
+const questionTwoIcon = document.getElementById('questionTwoIcon');
+const questionContainers = document.getElementsByClassName('questionContainer');
+const yesOne = document.getElementById('yesOne');
+const noOne = document.getElementById('noOne');
+const yesTwo = document.getElementById('yesTwo');
+const noTwo = document.getElementById('noTwo');
 const ctx = canvas.getContext('2d');
 
 let waves = [];
@@ -13,8 +20,10 @@ let speed = 5;
 let points = 0;
 let time = 120;
 let timerInterval;
+let questionOneAnswered = false;
+let questionTwoAnswered = false;
 
-
+// mängima asumisel, eemalda intro leht
 document.getElementById('play').addEventListener('click', () => {
   intro.style.top = '-1000px';
 
@@ -22,6 +31,7 @@ document.getElementById('play').addEventListener('click', () => {
   timerInterval = setInterval(updateTimer, 1000);
 });
 
+// Taimeri käivitamine
 const updateTimer = () => {
   if (time > 0) {
       time--;
@@ -35,8 +45,9 @@ const updateTimer = () => {
   }
 };
 
+// Punktide uuendamine
 const updatePoints = (newPoints) => {
-  points = newPoints;
+  points += newPoints;
   document.getElementById('points').textContent = points;
 };
 
@@ -55,7 +66,74 @@ const resizeCanvas = () => {
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
 
+// Paadi asukoha uuendamine
 let lifeboatPosition = { x: canvas.width / 3, y: canvas.height / 2 };
+
+// Kontrolli küsimuste kokkupõrget
+const checkQuestionCollision = () => {
+  const lifeboatRect = lifeboat.getBoundingClientRect();
+  const questionOneRect = questionOneIcon.getBoundingClientRect();
+  const questionTwoRect = questionTwoIcon.getBoundingClientRect();
+
+  // Kui paat puutub esimese küsimusega
+  if (!questionOneAnswered && lifeboatRect.x < questionOneRect.x + questionOneRect.width &&
+      lifeboatRect.x + lifeboatRect.width > questionOneRect.x &&
+      lifeboatRect.y < questionOneRect.y + questionOneRect.height &&
+      lifeboatRect.y + lifeboatRect.height > questionOneRect.y) {
+      showQuestion(0); // Näita esimest küsimust
+  }
+
+  // Kui paat puutub teise küsimusega
+  if (!questionTwoAnswered && lifeboatRect.x < questionTwoRect.x + questionTwoRect.width &&
+      lifeboatRect.x + lifeboatRect.width > questionTwoRect.x &&
+      lifeboatRect.y < questionTwoRect.y + questionTwoRect.height &&
+      lifeboatRect.y + lifeboatRect.height > questionTwoRect.y) {
+      showQuestion(1); // Näita teist küsimust
+  }
+};
+
+// Näita küsimuse konteinerit
+const showQuestion = (questionIndex) => {
+  questionContainers[questionIndex].style.display = 'flex';
+};
+
+// Peida küsimuse konteiner
+const hideQuestion = (questionIndex) => {
+  questionContainers[questionIndex].style.display = 'none';
+};
+
+// Kontrolli esimese küsimuse vastust
+yesOne.addEventListener('click', () => {
+  handleAnswer(0, true); // Õige vastus (Jah)
+});
+noOne.addEventListener('click', () => {
+  handleAnswer(0, false); // Vale vastus (Ei)
+});
+
+// Kontrolli teise küsimuse vastust
+yesTwo.addEventListener('click', () => {
+  handleAnswer(1, false); // Vale vastus (Jah)
+});
+noTwo.addEventListener('click', () => {
+  handleAnswer(1, true); // Õige vastus (Ei)
+});
+
+// Töötle vastust ja uuenda punkte
+const handleAnswer = (questionIndex, isCorrect) => {
+  if (isCorrect) {
+      alert('Õige vastus! Teenisid 500 punkti!');
+      updatePoints(500); // Lisa punkte
+  } else {
+      alert('Vale vastus! Vale vastus maksab 500 punkti!');
+      updatePoints(-500); // Lahuta punkte
+  }
+
+  hideQuestion(questionIndex);
+
+  // Märgi küsimus vastatuks
+  if (questionIndex === 0) questionOneAnswered = true;
+  if (questionIndex === 1) questionTwoAnswered = true;
+};
 
 // Funktsioon mängija liigutamiseks klaviatuuriga
 const movePlayerWithKeyboard = () => {
@@ -176,18 +254,21 @@ const checkWinCondition = () => {
       lifeboatRect.y + lifeboatRect.height > islandRect.y + padding
   ) {
       clearInterval(timerInterval); // Peatame taimeri, kui mängija jõuab saarele
-      alert(`Sa jõudsid saarele! Sinu aeg oli! Sa said 1000 punkti!`);
+      
       updatePoints(1000);
+      alert(`Sa jõudsid saarele! Sinu lõpp-punktid on: ${points} punkti!`);
       
       resetGame();
   }
 };
 
+// Mängu taaskäivitamine
 const resetGame = () => {
-
   time = 120;
+  points = 0;
   updatePoints(0);
   document.getElementById('time').textContent = '2:00';  
+
   // Taastame mängija algse asukoha
   player.style.left = '150px';
   player.style.top = '150px';
@@ -200,10 +281,12 @@ const resetGame = () => {
 
   intro.style.top = 0;
 
+  questionOneAnswered = false;
+  questionTwoAnswered = false;
+  document.querySelectorAll('.questionContainer').forEach(q => q.style.display = 'none');
+
   // Tühjendame lainete massiivi
   waves = [];
-
-  // Võib-olla lisada ka muid algseadeid, nagu mängu kiirus või muud parameetrid
   speed = 5;
   isMoving = { left: false, right: false, up: false, down: false };
 };
@@ -224,16 +307,17 @@ const drawWaves = () => {
 
 // Peamine joonistamise funktsioon
 const draw = () => {
-    drawWaves(); // Kutsume funktsiooni, mis joonistab lained
-    updateWaves(); // Uuendame laineid
-    updateLifeboatPosition(); // Uuendame paadi asukohta
-    movePlayerWithKeyboard(); // Mängija liigutamine klaviatuuri abil
+    drawWaves();
+    updateWaves();
+    updateLifeboatPosition();
+    movePlayerWithKeyboard();
 };
 
 
 // Mängu põhitsükkel
 const gameLoop = () => {
   draw(); // Joonista kõik asjad iga kaadriga
+  checkQuestionCollision(); // Kontrolli küsimuste kokk
   requestAnimationFrame(gameLoop); // Kutsu gameLoop uuesti
 };
 
