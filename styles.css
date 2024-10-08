@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Gluten:wght@100..900&display=swap');
+
+:root {
+  --light-blue: #2989a7;
+  --dark-blue: #274d6d;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(to right, var(--light-blue), var(--dark-blue));
+}
+
+.game {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+canvas {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+}
+
+#player {
+  position: absolute;
+  cursor: pointer;
+  top: 25%;
+  left: 25%;
+  z-index: 10;
+}
+
+#lifeboat {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+#island {
+  position: absolute;
+  bottom: 20px;
+  right: 50px;
+  width: 300px;
+  height: 200px;
+  z-index: 5;
+}
+
+#letsPlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle, var(--light-blue), var(--dark-blue));
+  transition: 0.8s ease-in-out;
+}
+
+.playContainer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Gluten', cursive;
+  font-weight: 200;
+  color: white;
+  font-size: 1.5vw;
+}
+
+h1 {
+  font-size: 4vw;
+}
+
+.questionText {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.questionText img {
+  width: 4vw;
+  height: 4vw;
+}
+
+.arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.arrow img {
+  width: 6vw;
+  height: 4.5vw;
+}
+
+#play {
+  margin: 50px;
+  padding: 15px 30px;
+  background-color: white;
+  color: var(--light-blue);
+  border: none;
+  border-radius: 20px;
+  font-size: 3vw;
+  box-shadow: 10px 5px 10px rgba(0, 0, 0, 0.404);
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+#play:hover {
+  background-color: var(--light-blue);
+  color: white;
+}

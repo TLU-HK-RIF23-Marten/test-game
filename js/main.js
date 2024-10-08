@@ -1,3 +1,4 @@
+const intro = document.getElementById('letsPlay');
 const canvas = document.getElementById('canvas');
 const player = document.getElementById('player');
 const lifeboat = document.getElementById('lifeboat');
@@ -7,6 +8,12 @@ const ctx = canvas.getContext('2d');
 let waves = [];
 let isMoving = { left: false, right: false, up: false, down: false };
 let speed = 5;
+let points = 0;
+
+
+intro.addEventListener('click', () => {
+  intro.style.top = '-1000px';
+});
 
 // Suuruse kohandamine
 const resizeCanvas = () => {
@@ -33,19 +40,19 @@ const movePlayerWithKeyboard = () => {
     // Liigume vastavalt klahvidele
     if (isMoving.left) {
         newX -= speed;
-        player.style.transform = `rotate(-90deg)`;  // Vasakule
+        player.style.transform = 'rotate(-90deg)';  // Vasakule
     }
     if (isMoving.right) {
         newX += speed;
-        player.style.transform = `rotate(90deg)`;   // Paremale
+        player.style.transform = 'rotate(90deg)';   // Paremale
     }
     if (isMoving.up) {
         newY -= speed;
-        player.style.transform = `rotate(0deg)`;    // Üles
+        player.style.transform = 'rotate(0deg)';    // Üles
     }
     if (isMoving.down) {
         newY += speed;
-        player.style.transform = `rotate(180deg)`;  // Alla
+        player.style.transform = 'rotate(180deg)';  // Alla
     }
 
     // Piirid canvase sees
@@ -55,8 +62,8 @@ const movePlayerWithKeyboard = () => {
     if (newY + player.height > canvas.height) newY = canvas.height - player.height;
 
     // Asetame mängija uude asukohta
-    player.style.left = `${newX}px`;
-    player.style.top = `${newY}px`;
+    player.style.left = newX + 'px';
+    player.style.top = newY + 'px';
 
     // Loome laine liikumisel
     createWave(newX + player.width / 2, newY + player.height / 2);
@@ -114,7 +121,7 @@ const updateLifeboatPosition = () => {
         lifeboatPosition.y -= (dy / distance) * 5;
 
         const angle = Math.atan2(dy, dx) * (180 / Math.PI);
-        lifeboat.style.transform = `rotate(${angle - 90}deg)`;
+        lifeboat.style.transform = 'rotate(' + (angle - 90) + 'deg)';
     }
 
     const margin = 30;
@@ -159,6 +166,8 @@ const resetGame = () => {
   lifeboatPosition = { x: canvas.width / 3, y: canvas.height / 2 };
   lifeboat.style.left = `${lifeboatPosition.x}px`;
   lifeboat.style.top = `${lifeboatPosition.y}px`;
+
+  intro.style.top = 0;
 
   // Tühjendame lainete massiivi
   waves = [];
