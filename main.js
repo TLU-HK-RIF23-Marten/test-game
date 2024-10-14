@@ -55,12 +55,6 @@ const updatePoints = (newPoints) => {
 const resizeCanvas = () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-
-    // Määrame piltide suurused
-    player.width = 70; // Mängija laius
-    player.height = 80; // Mängija kõrgus
-    lifeboat.width = 70; // Paadi laius
-    lifeboat.height = 100; // Paadi kõrgus
 };
 
 resizeCanvas();
