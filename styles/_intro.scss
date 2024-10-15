@@ -1,0 +1,64 @@
+@import './var-mixins';
+
+#letsPlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle, $light-blue, $dark-blue);
+  transition: 0.8s ease-in-out;
+
+  .playContainer {
+    height: 100%;
+    @include flex;
+    flex-direction: column;
+    @include gluten-font(300);
+    color: white;
+    font-size: 1.5vw;
+
+    h1 {
+      font-size: 4vw;
+    }
+
+    .questionText {
+      @include flex;
+      gap: 20px;
+
+      img {
+        width: 4vw;
+        height: 4vw;
+      }
+    }
+
+    .arrow {
+      @include flex;
+      gap: 20px;
+
+      img {
+        width: 6vw;
+        height: 4.5vw;
+      }
+    }
+
+    #play {
+      margin: 50px;
+      padding: 15px 30px;
+      background-color: white;
+      color: $light-blue;
+      border: none;
+      border-radius: 20px;
+      font-size: 3vw;
+      box-shadow: 10px 5px 10px rgba(0, 0, 0, 0.404);
+      cursor: pointer;
+      transition: 0.5s;
+
+      &:hover {
+        background-color: $light-blue;
+        color: white;
+      }
+    }
+  }
+}
+

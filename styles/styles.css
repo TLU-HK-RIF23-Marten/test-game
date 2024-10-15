@@ -1,0 +1,416 @@
+@import url("https://fonts.googleapis.com/css2?family=Gluten:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Gluten:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Gluten:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Gluten:wght@100..900&display=swap");
+.game {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.game canvas {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+}
+.game #player {
+  position: absolute;
+  cursor: pointer;
+  top: 25%;
+  left: 25%;
+  width: 70px;
+  height: 80px;
+  z-index: 10;
+}
+@media screen and (max-width: 768px) {
+  .game #player {
+    width: 40px;
+    height: 50px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .game #player {
+    width: 30px;
+    height: 40px;
+  }
+}
+@media screen and (max-width: 320px) {
+  .game #player {
+    width: 30px;
+    height: 40px;
+  }
+}
+.game #lifeboat {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 70px;
+  height: 100px;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+@media screen and (max-width: 1024px) {
+  .game #lifeboat {
+    top: 30%;
+    transform: translate(-10%, -10%);
+  }
+}
+@media screen and (max-width: 768px) {
+  .game #lifeboat {
+    width: 50px;
+    height: 80px;
+    top: 20%;
+    transform: translate(-10%, -10%);
+  }
+}
+@media screen and (max-width: 480px) {
+  .game #lifeboat {
+    width: 30px;
+    height: 60px;
+    top: 20%;
+    transform: translate(-10%, -10%);
+  }
+}
+@media screen and (max-width: 320px) {
+  .game #lifeboat {
+    width: 30px;
+    height: 60px;
+    top: 10%;
+    left: 10%;
+    transform: translate(-10%, -10%);
+  }
+}
+.game #island {
+  position: absolute;
+  bottom: 20px;
+  right: 50px;
+  width: 300px;
+  height: 200px;
+  z-index: 5;
+}
+@media screen and (max-width: 1024px) {
+  .game #island {
+    width: 200px;
+    height: 150px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .game #island {
+    width: 100px;
+    height: 80px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .game #island {
+    width: 80px;
+    height: 60px;
+  }
+}
+@media screen and (max-width: 320px) {
+  .game #island {
+    width: 50px;
+    height: 40px;
+    right: 20px;
+  }
+}
+
+.timePoints {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 150px;
+  height: 100px;
+  padding: 10px;
+  color: white;
+  font-size: 25px;
+}
+.timePoints .timeLeft, .timePoints .pointsBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+@media screen and (max-width: 1024px) {
+  .timePoints {
+    right: 10px;
+    padding: 0;
+    font-size: 20px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .timePoints {
+    right: 10px;
+    padding: 0;
+    font-size: 16px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .timePoints {
+    right: 5px;
+    width: 100px;
+    padding: 0;
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 320px) {
+  .timePoints {
+    right: 5px;
+    width: 80px;
+    padding: 0;
+    font-size: 12px;
+  }
+}
+#questionOneIcon {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  top: 100px;
+}
+
+@media screen and (max-width: 1024px) {
+  #questionOneIcon {
+    width: 50px;
+    height: 50px;
+  }
+}
+@media screen and (max-width: 768px) {
+  #questionOneIcon {
+    width: 30px;
+    height: 30px;
+  }
+}
+@media screen and (max-width: 480px) {
+  #questionOneIcon {
+    width: 30px;
+    height: 30px;
+  }
+}
+@media screen and (max-width: 320px) {
+  #questionOneIcon {
+    width: 20px;
+    height: 20px;
+    top: 20px;
+  }
+}
+#questionTwoIcon {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  bottom: 100px;
+  left: 300px;
+}
+
+@media screen and (max-width: 1024px) {
+  #questionTwoIcon {
+    width: 50px;
+    height: 50px;
+  }
+}
+@media screen and (max-width: 768px) {
+  #questionTwoIcon {
+    width: 30px;
+    height: 30px;
+    left: 50px;
+  }
+}
+@media screen and (max-width: 480px) {
+  #questionTwoIcon {
+    width: 30px;
+    height: 30px;
+    left: 50px;
+  }
+}
+@media screen and (max-width: 320px) {
+  #questionTwoIcon {
+    width: 20px;
+    height: 20px;
+    left: 100px;
+  }
+}
+.questionContainer {
+  position: absolute;
+  z-index: 50;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(41, 138, 167, 0.8784313725);
+  font-family: "Gluten", serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  font-variation-settings: "slnt" 0;
+  line-height: 25px;
+}
+.questionContainer .questionBox {
+  width: 50%;
+  height: 50%;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: white;
+}
+.questionContainer .questionBox p {
+  padding: 50px;
+  font-size: 20px;
+}
+.questionContainer .questionBox .answerBox {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.questionContainer .questionBox .answerBox #yesOne, .questionContainer .questionBox .answerBox #yesTwo {
+  padding: 10px 20px;
+  background-color: #29a749;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.questionContainer .questionBox .answerBox #yesOne:hover, .questionContainer .questionBox .answerBox #yesTwo:hover {
+  background-color: #125a24;
+}
+@media screen and (max-width: 1024px) {
+  .questionContainer .questionBox {
+    width: 70%;
+    height: 70%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .questionContainer .questionBox {
+    width: 90%;
+    height: 90%;
+  }
+  .questionContainer .questionBox p, .questionContainer #yesOne, .questionContainer #yesTwo, .questionContainer #noOne, .questionContainer #noTwo {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .questionContainer .questionBox {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+  .questionContainer .questionBox p, .questionContainer #yesOne, .questionContainer #yesTwo, .questionContainer #noOne, .questionContainer #noTwo {
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 320px) {
+  .questionContainer .questionBox {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+  .questionContainer .questionBox p, .questionContainer #yesOne, .questionContainer #yesTwo, .questionContainer #noOne, .questionContainer #noTwo {
+    font-size: 12px;
+  }
+}
+
+#noOne, #noTwo {
+  padding: 10px 20px;
+  background-color: #b81e1e;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+#noOne:hover, #noTwo:hover {
+  background-color: #6a0f0f;
+}
+
+#letsPlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle, #2989a7, #274d6d);
+  transition: 0.8s ease-in-out;
+}
+#letsPlay .playContainer {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: "Gluten", serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  font-variation-settings: "slnt" 0;
+  color: white;
+  font-size: 1.5vw;
+}
+#letsPlay .playContainer h1 {
+  font-size: 4vw;
+}
+#letsPlay .playContainer .questionText {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+#letsPlay .playContainer .questionText img {
+  width: 4vw;
+  height: 4vw;
+}
+#letsPlay .playContainer .arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+#letsPlay .playContainer .arrow img {
+  width: 6vw;
+  height: 4.5vw;
+}
+#letsPlay .playContainer #play {
+  margin: 50px;
+  padding: 15px 30px;
+  background-color: white;
+  color: #2989a7;
+  border: none;
+  border-radius: 20px;
+  font-size: 3vw;
+  box-shadow: 10px 5px 10px rgba(0, 0, 0, 0.404);
+  cursor: pointer;
+  transition: 0.5s;
+}
+#letsPlay .playContainer #play:hover {
+  background-color: #2989a7;
+  color: white;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(135deg, #2989a7, rgb(115, 143, 161), #274d6d, #2989a7, rgb(115, 143, 161), #274d6d, #2989a7, rgb(115, 143, 161), #274d6d);
+  background-size: 400% 400%;
+  animation: moveBg 15s ease-in-out infinite;
+}/*# sourceMappingURL=styles.css.map */
