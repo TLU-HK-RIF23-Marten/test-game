@@ -14,6 +14,12 @@ const yesTwo = document.getElementById('yesTwo');
 const noTwo = document.getElementById('noTwo');
 const ctx = canvas.getContext('2d');
 
+const boatImages = {
+  parv: 'img/parv.png',
+  parvEsimene: 'img/parvEsimene.png',
+  parvTeine: 'img/parvTeine.png',
+}
+
 let waves = [];
 let isMoving = { left: false, right: false, up: false, down: false };
 let speed = 5;
@@ -22,6 +28,7 @@ let time = 120;
 let timerInterval;
 let questionOneAnswered = false;
 let questionTwoAnswered = false;
+let correctAnswers = 0;
 
 // mängima asumisel, eemalda intro leht
 document.getElementById('play').addEventListener('click', () => {
@@ -62,6 +69,24 @@ window.addEventListener('resize', resizeCanvas);
 
 // Paadi asukoha uuendamine
 let lifeboatPosition = { x: canvas.width / 3, y: canvas.height / 2 };
+
+const updateBoatImage = () => {
+  if (correctAnswers === 0) {
+    lifeboat.src = boatImages.parv;
+  } else if (correctAnswers === 1) {
+    lifeboat.src = boatImages.parvEsimene;
+  } else if (correctAnswers === 2) {
+    lifeboat.src = boatImages.parvTeine;
+  }
+}
+
+const hideVestIcon = (questionIndex) => {
+  if (questionIndex === 0) {
+      questionOneIcon.style.display = 'none';
+  } else if (questionIndex === 1) {
+      questionTwoIcon.style.display = 'none';
+  }
+};
 
 // Kontrolli küsimuste kokkupõrget
 const checkQuestionCollision = () => {
@@ -117,12 +142,15 @@ const handleAnswer = (questionIndex, isCorrect) => {
   if (isCorrect) {
       alert('Õige vastus! Teenisid 500 punkti!');
       updatePoints(500); // Lisa punkte
+      correctAnswers++;
+      updateBoatImage();
   } else {
       alert('Vale vastus! Vale vastus maksab 500 punkti!');
       updatePoints(-500); // Lahuta punkte
   }
 
   hideQuestion(questionIndex);
+  hideVestIcon(questionIndex);
 
   // Märgi küsimus vastatuks
   if (questionIndex === 0) questionOneAnswered = true;
@@ -260,6 +288,8 @@ const checkWinCondition = () => {
 const resetGame = () => {
   time = 120;
   points = 0;
+  correctAnswers = 0;
+  updateBoatImage();
   updatePoints(0);
   document.getElementById('time').textContent = '2:00';  
 
