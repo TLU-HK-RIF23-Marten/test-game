@@ -23,10 +23,10 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 177.77vh; /* Aspect ratio for 16:9 videos */
+      width: 177.77vh;
       height: 100vh;
       transform: translate(-50%, -50%);
-      pointer-events: none; /* Prevent interaction with the video */
+      pointer-events: none;
     }
   }
 
