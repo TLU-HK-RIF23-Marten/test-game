@@ -1,0 +1,14 @@
+@import './screenElements';
+@import './extras';
+@import './intro';
+@import './var-mixins';
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(135deg, $light-blue, rgb(115, 143, 161), $dark-blue, $light-blue, rgb(115, 143, 161), $dark-blue, $light-blue, rgb(115, 143, 161), $dark-blue);
+  background-size: 400% 400%;
+  animation: moveBg 15s ease-in-out infinite;
+}

@@ -1,0 +1,155 @@
+@import './var-mixins';
+
+.game {
+  position: relative;
+  @include flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  canvas {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  #player {
+    position: absolute;
+    cursor: pointer;
+    top: 25%;
+    left: 25%;
+    width: 70px;
+    height: 80px;
+    z-index: 10;
+  }
+
+  @media screen and (max-width: 768px) {
+    #player {
+      width: 40px;
+      height: 50px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    #player {
+      width: 30px;
+      height: 40px;
+    }
+  }
+
+  @media screen and (max-width: 320px) {
+    #player {
+      width: 30px;
+      height: 40px;
+    }
+  }
+  
+  #lifeboat {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 70px;
+    height: 100px;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+  }
+
+  @media screen and (max-width: 1024px) {
+    #lifeboat {
+      top: 30%;
+      transform: translate(-10%, -10%);
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    #lifeboat {
+      width: 50px;
+      height: 80px;
+      top: 20%;
+      transform: translate(-10%, -10%);
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    #lifeboat {
+      width: 30px;
+      height: 60px;
+      top: 20%;
+      transform: translate(-10%, -10%);
+    }
+  }
+
+  @media screen and (max-width: 320px) {
+    #lifeboat {
+      width: 30px;
+      height: 60px;
+      top: 10%;
+      left: 10%;
+      transform: translate(-10%, -10%);
+    }
+  }
+  
+  #island {
+    position: absolute;
+    bottom: 20px;
+    right: 50px;
+    width: 300px;
+    height: 200px;
+    z-index: 5;
+  }
+
+  @media screen and (max-width: 1024px) {
+    #island {
+      width: 200px;
+      height: 150px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    #island {
+      width: 100px;
+      height: 80px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    #island {
+      width: 80px;
+      height: 60px;
+    }
+  }
+
+  @media screen and (max-width: 320px) {
+    #island {
+      width: 50px;
+      height: 40px;
+      right: 20px;
+    }
+  }
+
+  .controls {
+    position: absolute;
+    z-index: 15;
+    bottom: 0;
+    padding-bottom: 20px;
+    @include flex;
+    flex-direction: column;
+    gap: 10px;
+
+    div {
+      @include flex;
+      gap: 10px;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .controls {
+      display: none;
+    }
+  }
+}

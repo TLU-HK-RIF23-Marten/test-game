@@ -13,6 +13,16 @@ const noOne = document.getElementById('noOne');
 const yesTwo = document.getElementById('yesTwo');
 const noTwo = document.getElementById('noTwo');
 const ctx = canvas.getContext('2d');
+const upArrow = document.getElementById('upArrow');
+const downArrow = document.getElementById('downArrow');
+const leftArrow = document.getElementById('leftArrow');
+const rightArrow = document.getElementById('rightArrow');
+
+const boatImages = {
+  parv: 'img/parv.png',
+  parvEsimene: 'img/parvEsimene.png',
+  parvTeine: 'img/parvTeine.png',
+}
 
 let waves = [];
 let isMoving = { left: false, right: false, up: false, down: false };
@@ -22,6 +32,7 @@ let time = 120;
 let timerInterval;
 let questionOneAnswered = false;
 let questionTwoAnswered = false;
+let correctAnswers = 0;
 
 // mängima asumisel, eemalda intro leht
 document.getElementById('play').addEventListener('click', () => {
@@ -55,12 +66,6 @@ const updatePoints = (newPoints) => {
 const resizeCanvas = () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-
-    // Määrame piltide suurused
-    player.width = 70; // Mängija laius
-    player.height = 80; // Mängija kõrgus
-    lifeboat.width = 70; // Paadi laius
-    lifeboat.height = 100; // Paadi kõrgus
 };
 
 resizeCanvas();
@@ -68,6 +73,24 @@ window.addEventListener('resize', resizeCanvas);
 
 // Paadi asukoha uuendamine
 let lifeboatPosition = { x: canvas.width / 3, y: canvas.height / 2 };
+
+const updateBoatImage = () => {
+  if (correctAnswers === 0) {
+    lifeboat.src = boatImages.parv;
+  } else if (correctAnswers === 1) {
+    lifeboat.src = boatImages.parvEsimene;
+  } else if (correctAnswers === 2) {
+    lifeboat.src = boatImages.parvTeine;
+  }
+}
+
+const hideVestIcon = (questionIndex) => {
+  if (questionIndex === 0) {
+      questionOneIcon.style.display = 'none';
+  } else if (questionIndex === 1) {
+      questionTwoIcon.style.display = 'none';
+  }
+};
 
 // Kontrolli küsimuste kokkupõrget
 const checkQuestionCollision = () => {
@@ -123,12 +146,15 @@ const handleAnswer = (questionIndex, isCorrect) => {
   if (isCorrect) {
       alert('Õige vastus! Teenisid 500 punkti!');
       updatePoints(500); // Lisa punkte
+      correctAnswers++;
+      updateBoatImage();
   } else {
       alert('Vale vastus! Vale vastus maksab 500 punkti!');
       updatePoints(-500); // Lahuta punkte
   }
 
   hideQuestion(questionIndex);
+  hideVestIcon(questionIndex);
 
   // Märgi küsimus vastatuks
   if (questionIndex === 0) questionOneAnswered = true;
@@ -187,9 +213,24 @@ document.addEventListener('keyup', (e) => {
     if (e.key === 'ArrowDown') isMoving.down = false;
 });
 
+const addArrowButtonControls = (arrowElement, direction) => {
+  arrowElement.addEventListener('mousedown', () => isMoving[direction] = true);
+  arrowElement.addEventListener('mouseup', () => isMoving[direction] = false);
+  arrowElement.addEventListener('mouseleave', () => isMoving[direction] = false); // To stop movement if mouse leaves the button
+  arrowElement.addEventListener('touchstart', () => isMoving[direction] = true); // For touch devices
+  arrowElement.addEventListener('touchend', () => isMoving[direction] = false);  // For touch devices
+};
+
+// Määra nupud liikumiseks
+addArrowButtonControls(upArrow, 'up');
+addArrowButtonControls(downArrow, 'down');
+addArrowButtonControls(leftArrow, 'left');
+addArrowButtonControls(rightArrow, 'right');
+
 // Lainete loomise funktsioon
 const createWave = (x, y) => {
-    waves.push({ x: x, y: y, radius: 0, maxRadius: 120 });
+  let playerWidth = player.width + 50;
+  waves.push({ x: x, y: y, radius: 0, maxRadius: playerWidth });
 };
 
 // Lainete uuendamine
@@ -216,8 +257,8 @@ const updateLifeboatPosition = () => {
     const dx = playerRect.left + playerRect.width / 2 - (lifeboatRect.left + lifeboatRect.width / 2);
     const dy = playerRect.top + playerRect.height / 2 - (lifeboatRect.top + lifeboatRect.height / 2);
     const distance = Math.hypot(dx, dy);
-    const playerBoatDistance = 120; // 50px kaugus mängijast
-
+    let playerDistance = player.width + 50;
+    const playerBoatDistance = playerDistance;
     if (distance < playerBoatDistance) {
         // Muudame suunda: paat liigub mängijast eemale
         lifeboatPosition.x -= (dx / distance) * 5;
@@ -266,6 +307,8 @@ const checkWinCondition = () => {
 const resetGame = () => {
   time = 120;
   points = 0;
+  correctAnswers = 0;
+  updateBoatImage();
   updatePoints(0);
   document.getElementById('time').textContent = '2:00';  
 

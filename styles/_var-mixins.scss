@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Gluten:wght@100..900&display=swap');
+
+@mixin flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin gluten-font($weight) {
+  font-family: "Gluten", serif;
+  font-optical-sizing: auto;
+  font-weight: $weight;
+  font-style: normal;
+  font-variation-settings: "slnt" 0;
+}
+
+$light-blue: #2989a7;
+$dark-blue: #274d6d;

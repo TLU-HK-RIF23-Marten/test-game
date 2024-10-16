@@ -1,0 +1,236 @@
+@import './var-mixins';
+
+.timePoints {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  @include flex;
+  flex-direction: column;
+  width: 150px;
+  height: 100px;
+  padding: 10px;
+  color: white;
+  font-size: 25px;
+
+  .timeLeft, .pointsBox {
+    @include flex;
+    gap: 10px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .timePoints {
+    right: 10px;
+    padding: 0;
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .timePoints {
+    right: 10px;
+    padding: 0;
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .timePoints {
+    right: 5px;
+    width: 100px;
+    padding: 0;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .timePoints {
+    right: 5px;
+    width: 80px;
+    padding: 0;
+    font-size: 12px;
+  }
+}
+
+#questionOneIcon {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  top: 100px;
+}
+
+@media screen and (max-width: 1024px) {
+  #questionOneIcon {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #questionOneIcon {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #questionOneIcon {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  #questionOneIcon {
+    width: 20px;
+    height: 20px;
+    top: 20px;
+  }
+}
+
+#questionTwoIcon {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  bottom: 100px;
+  left: 300px;
+}
+
+@media screen and (max-width: 1024px) {
+  #questionTwoIcon {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #questionTwoIcon {
+    width: 30px;
+    height: 30px;
+    left: 50px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #questionTwoIcon {
+    width: 30px;
+    height: 30px;
+    left: 50px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  #questionTwoIcon {
+    width: 20px;
+    height: 20px;
+    left: 100px;
+  }
+}
+
+.questionContainer {
+  position: absolute;
+  z-index: 50;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: #298aa7e0;
+  @include gluten-font(300);
+  line-height: 25px;
+
+  .questionBox {
+    width: 50%;
+    height: 50%;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: white;
+
+    p {
+      padding: 50px;
+      font-size: 20px;
+    }
+
+    .answerBox {
+      width: 100%;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+
+      #yesOne, #yesTwo {
+        padding: 10px 20px;
+        background-color: #29a749;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 20px;
+        cursor: pointer;
+        transition: 0.5s;
+
+        &:hover {
+          background-color: #125a24;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    .questionBox {
+      width: 70%;
+      height: 70%;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .questionBox {
+      width: 90%;
+      height: 90%;
+    }
+    .questionBox p, #yesOne, #yesTwo, #noOne, #noTwo {
+      font-size: 16px;
+      padding: 10px 20px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .questionBox {
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+    }
+    .questionBox p, #yesOne, #yesTwo, #noOne, #noTwo {
+      font-size: 14px;
+    }
+  }
+
+  @media screen and (max-width: 320px) {
+    .questionBox {
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+    }
+    .questionBox p, #yesOne, #yesTwo, #noOne, #noTwo {
+      font-size: 12px;
+    }
+  }
+}
+
+
+#noOne, #noTwo {
+  padding: 10px 20px;
+  background-color: #b81e1e;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.5s;
+
+  &:hover {
+    background-color: #6a0f0f;
+  }
+}

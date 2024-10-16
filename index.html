@@ -3,18 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles/styles.css">
   <title>Päästeparve Mäng</title>
 </head>
 <body>
   <section id="letsPlay">
+    <div class="videoBackground">
+      <iframe 
+        src="https://www.youtube.com/embed/YmX8seNKVQo?autoplay=1&loop=1&mute=1&playlist=YmX8seNKVQo" 
+        frameborder="0" 
+        allow="autoplay; encrypted-media" 
+        allowfullscreen>
+      </iframe>
+    </div>
     <div class="playContainer">
       <h1>Päästeparve Mäng</h1>
       <p>Lükka katkine parv väiksele saarele, kasutades lainete jõudu.</p>
       <p>Keskmiselt on inimesel aega 2 minutit jääkülmas vees enne kui ta kaotab kontrolli oma lihaste üle!</p>
       <div class="questionText">
         <p>Vasta küsimustele, et võita lisapunkte.</p>
-        <img src="img/kusimus.png" alt="küsimus">
+        <img src="img/vest.png" alt="küsimus">
       </div>
       <div class="arrow">
         <img src="img/nooled.png" alt="nooled">
@@ -25,7 +33,7 @@
   </section>
   <section class="game">
     <canvas id="canvas"></canvas>
-    <img id="player" src="img/mangija.png" alt="mängija kuju">
+    <img id="player" src="img/ujuja.png" alt="mängija kuju">
     <img id="lifeboat" src="img/parv.png" alt="parv">
     <img id="island" src="img/island.png" alt="saareke">
     <section class="timePoints">
@@ -38,8 +46,18 @@
         <p id="points">0</p>
       </div>
     </section>
-    <img id="questionOneIcon" src="img/kusimus.png" alt="esimene küsimus">
-    <img id="questionTwoIcon" src="img/kusimus.png" alt="teine küsimus">
+    <section class="controls">
+      <div>
+        <img id="upArrow" src="img/ules.png" alt="ules">
+      </div>
+      <div>
+        <img id="leftArrow" src="img/vasak.png" alt="vasak">
+        <img id="downArrow" src="img/alla.png" alt="alla">
+        <img id="rightArrow" src="img/parem.png" alt="parem">
+      </div>
+    </section>
+    <img id="questionOneIcon" src="img/vest.png" alt="esimene küsimus">
+    <img id="questionTwoIcon" src="img/vest.png" alt="teine küsimus">
     <div class="questionContainer">
       <div class="questionBox">
         <p>Kas väike paat võib ümber minna isegi rahulikus vees, kui inimesed paadis liiguvad äkki ja ebaühtlaselt?</p>
