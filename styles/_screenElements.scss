@@ -131,4 +131,25 @@
       right: 20px;
     }
   }
+
+  .controls {
+    position: absolute;
+    z-index: 15;
+    bottom: 0;
+    padding-bottom: 20px;
+    @include flex;
+    flex-direction: column;
+    gap: 10px;
+
+    div {
+      @include flex;
+      gap: 10px;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .controls {
+      display: none;
+    }
+  }
 }

@@ -13,6 +13,10 @@ const noOne = document.getElementById('noOne');
 const yesTwo = document.getElementById('yesTwo');
 const noTwo = document.getElementById('noTwo');
 const ctx = canvas.getContext('2d');
+const upArrow = document.getElementById('upArrow');
+const downArrow = document.getElementById('downArrow');
+const leftArrow = document.getElementById('leftArrow');
+const rightArrow = document.getElementById('rightArrow');
 
 const boatImages = {
   parv: 'img/parv.png',
@@ -209,9 +213,24 @@ document.addEventListener('keyup', (e) => {
     if (e.key === 'ArrowDown') isMoving.down = false;
 });
 
+const addArrowButtonControls = (arrowElement, direction) => {
+  arrowElement.addEventListener('mousedown', () => isMoving[direction] = true);
+  arrowElement.addEventListener('mouseup', () => isMoving[direction] = false);
+  arrowElement.addEventListener('mouseleave', () => isMoving[direction] = false); // To stop movement if mouse leaves the button
+  arrowElement.addEventListener('touchstart', () => isMoving[direction] = true); // For touch devices
+  arrowElement.addEventListener('touchend', () => isMoving[direction] = false);  // For touch devices
+};
+
+// Määra nupud liikumiseks
+addArrowButtonControls(upArrow, 'up');
+addArrowButtonControls(downArrow, 'down');
+addArrowButtonControls(leftArrow, 'left');
+addArrowButtonControls(rightArrow, 'right');
+
 // Lainete loomise funktsioon
 const createWave = (x, y) => {
-    waves.push({ x: x, y: y, radius: 0, maxRadius: 120 });
+  let playerWidth = player.width + 50;
+  waves.push({ x: x, y: y, radius: 0, maxRadius: playerWidth });
 };
 
 // Lainete uuendamine
@@ -238,8 +257,8 @@ const updateLifeboatPosition = () => {
     const dx = playerRect.left + playerRect.width / 2 - (lifeboatRect.left + lifeboatRect.width / 2);
     const dy = playerRect.top + playerRect.height / 2 - (lifeboatRect.top + lifeboatRect.height / 2);
     const distance = Math.hypot(dx, dy);
-    const playerBoatDistance = 120; // 50px kaugus mängijast
-
+    let playerDistance = player.width + 50;
+    const playerBoatDistance = playerDistance;
     if (distance < playerBoatDistance) {
         // Muudame suunda: paat liigub mängijast eemale
         lifeboatPosition.x -= (dx / distance) * 5;
