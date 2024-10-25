@@ -112,6 +112,7 @@
   .game #island {
     width: 80px;
     height: 60px;
+    bottom: 50px;
   }
 }
 @media screen and (max-width: 320px) {
@@ -124,7 +125,7 @@
 .game .controls {
   position: absolute;
   z-index: 15;
-  bottom: 0;
+  bottom: 80px;
   padding-bottom: 20px;
   display: flex;
   justify-content: center;
@@ -395,6 +396,8 @@
 }
 #letsPlay .playContainer {
   position: relative;
+  border: 1px solid black;
+  padding: 0 20px;
   z-index: 2;
   height: 100%;
   display: flex;
@@ -408,7 +411,7 @@
   font-variation-settings: "slnt" 0;
   color: white;
   background-color: rgba(0, 0, 0, 0.74);
-  font-size: 1.5vw;
+  font-size: 2.2vw;
 }
 #letsPlay .playContainer h1 {
   font-size: 4vw;
@@ -417,7 +420,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
 }
 #letsPlay .playContainer .questionText img {
   width: 4vw;

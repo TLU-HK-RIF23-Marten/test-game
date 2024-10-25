@@ -121,6 +121,7 @@
     #island {
       width: 80px;
       height: 60px;
+      bottom: 50px;
     }
   }
 
@@ -135,7 +136,7 @@
   .controls {
     position: absolute;
     z-index: 15;
-    bottom: 0;
+    bottom: 80px;
     padding-bottom: 20px;
     @include flex;
     flex-direction: column;
