@@ -144,13 +144,21 @@ noTwo.addEventListener('click', () => {
 // Töötle vastust ja uuenda punkte
 const handleAnswer = (questionIndex, isCorrect) => {
   if (isCorrect) {
-      alert('Õige vastus! Teenisid 500 punkti!');
-      updatePoints(500); // Lisa punkte
-      correctAnswers++;
-      updateBoatImage();
+    alert('Õige vastus! Teenisid 500 eurot!');
+    updatePoints(500);
+    correctAnswers++;
+    updateBoatImage();
   } else {
-      alert('Vale vastus! Vale vastus maksab 500 punkti!');
-      updatePoints(-500); // Lahuta punkte
+    if (points >= 500) {
+      alert('Vale vastus! Vale vastus maksab 200 eurot!');
+      updatePoints(-200);
+    } else if (points < 500 && correctAnswers > 0) {
+      alert('Vale vastus! Kuna sul pole piisavalt raha, kaotad ühe inimese!');
+      correctAnswers--;
+      updateBoatImage();
+    } else {
+      alert('Vale vastus, kuna teil pole ei raha ega inimesi siis te ei kaota hetkel midagi.');
+    }
   }
 
   hideQuestion(questionIndex);
@@ -297,7 +305,7 @@ const checkWinCondition = () => {
       clearInterval(timerInterval); // Peatame taimeri, kui mängija jõuab saarele
       
       updatePoints(1000);
-      alert(`Sa jõudsid saarele! Sinu lõpp-punktid on: ${points} punkti!`);
+      alert(`Sa jõudsid saarele! Sul on ${points} raha!`);
       
       resetGame();
   }
@@ -326,6 +334,8 @@ const resetGame = () => {
 
   questionOneAnswered = false;
   questionTwoAnswered = false;
+  questionOneIcon.style.display = 'block';
+  questionTwoIcon.style.display = 'block';
   document.querySelectorAll('.questionContainer').forEach(q => q.style.display = 'none');
 
   // Tühjendame lainete massiivi
