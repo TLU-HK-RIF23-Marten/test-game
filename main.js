@@ -20,6 +20,7 @@ const rightArrow = document.getElementById('rightArrow');
 const nextLevelScreen = document.querySelector('.nextLevelScreen');
 const peopleSaved = document.querySelector('.peopleSaved');
 const moneyEarned = document.querySelector('.moneyEarned');
+const timesUp = document.querySelector('.timesUp');
 
 const boatImages = {
   parv: 'img/parv.png',
@@ -38,6 +39,7 @@ let questionTwoAnswered = false;
 let correctAnswers = 0;
 let gameWon = false;
 nextLevelScreen.style.display = 'none';
+timesUp.style.display = 'none';
 
 // mängima asumisel, eemalda intro leht
 document.getElementById('play').addEventListener('click', () => {
@@ -51,6 +53,10 @@ document.getElementById('newGame').addEventListener('click', () => {
   resetGame();
 });
 
+document.getElementById('timeNewGame').addEventListener('click', () => {
+  resetGame();
+})
+
 // Taimeri käivitamine
 const updateTimer = () => {
   if (time > 0) {
@@ -60,8 +66,7 @@ const updateTimer = () => {
       document.getElementById('time').textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   } else {
       clearInterval(timerInterval); // Peatame taimeri, kui aeg otsas
-      alert('Aeg on läbi!');
-      resetGame();
+      timesUp.style.display = 'flex';
   }
 };
 
@@ -327,6 +332,7 @@ const checkWinCondition = () => {
 const resetGame = () => {
   gameWon = false;
   nextLevelScreen.style.display = 'none';
+  timesUp.style.display = 'none';
   time = 120;
   points = 0;
   correctAnswers = 0;
