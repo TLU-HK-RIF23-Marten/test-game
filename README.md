@@ -12,7 +12,7 @@ Päästeparve mäng on päästeülesandeid täitev brauserimäng, kus mängija �
 
 ## Kuidas mängida 
 
-- Klõpsa ***Play*** nupul, et alustada. 
+- Klõpsa ***Mängima*** nupul, et alustada. 
 - Kasuta nooleklahve või ekraaninuppe liikumiseks. 
 - Kogu punkte ja jõua saarele enne aja lõppu. 
 
