@@ -17,6 +17,9 @@ const upArrow = document.getElementById('upArrow');
 const downArrow = document.getElementById('downArrow');
 const leftArrow = document.getElementById('leftArrow');
 const rightArrow = document.getElementById('rightArrow');
+const nextLevelScreen = document.querySelector('.nextLevelScreen');
+const peopleSaved = document.querySelector('.peopleSaved');
+const moneyEarned = document.querySelector('.moneyEarned');
 
 const boatImages = {
   parv: 'img/parv.png',
@@ -33,13 +36,19 @@ let timerInterval;
 let questionOneAnswered = false;
 let questionTwoAnswered = false;
 let correctAnswers = 0;
+let gameWon = false;
+nextLevelScreen.style.display = 'none';
 
 // mängima asumisel, eemalda intro leht
 document.getElementById('play').addEventListener('click', () => {
-  intro.style.top = '-1000px';
+  intro.style.top = '-2000px';
 
   // Käivitame taimeri
   timerInterval = setInterval(updateTimer, 1000);
+});
+
+document.getElementById('newGame').addEventListener('click', () => {
+  resetGame();
 });
 
 // Taimeri käivitamine
@@ -291,6 +300,7 @@ const updateLifeboatPosition = () => {
 
 // Võidu tingimuste kontroll
 const checkWinCondition = () => {
+    if (gameWon) return;
     const islandRect = island.getBoundingClientRect();
     const lifeboatRect = lifeboat.getBoundingClientRect();
 
@@ -305,14 +315,18 @@ const checkWinCondition = () => {
       clearInterval(timerInterval); // Peatame taimeri, kui mängija jõuab saarele
       
       updatePoints(1000);
-      alert(`Sa jõudsid saarele! Sul on ${points} raha!`);
-      
-      resetGame();
+      nextLevelScreen.style.display = 'flex';
+      peopleSaved.textContent = `Päästetud inimesed: ${correctAnswers}`;
+      moneyEarned.textContent = `Kogutud raha: ${points} €`;
+
+      gameWon = true;
   }
 };
 
 // Mängu taaskäivitamine
 const resetGame = () => {
+  gameWon = false;
+  nextLevelScreen.style.display = 'none';
   time = 120;
   points = 0;
   correctAnswers = 0;
