@@ -2,6 +2,8 @@
 @import './extras';
 @import './intro';
 @import './var-mixins';
+@import './nextLevelScreen';
+@import './timesUp-pointsResult';
 
 body {
   margin: 0;
@@ -11,4 +13,13 @@ body {
   background: linear-gradient(135deg, $light-blue, rgb(115, 143, 161), $dark-blue, $light-blue, rgb(115, 143, 161), $dark-blue, $light-blue, rgb(115, 143, 161), $dark-blue);
   background-size: 400% 400%;
   animation: moveBg 15s ease-in-out infinite;
+}
+
+@keyframes moveBg {
+  0% {
+    background-position: 100% 100%; /* Start at bottom-right */
+  }
+  100% {
+    background-position: 0% 0%;   /* Move to top-left */
+  }
 }

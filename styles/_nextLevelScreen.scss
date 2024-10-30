@@ -1,0 +1,81 @@
+@import './var-mixins';
+
+.nextLevelScreen {
+  position: absolute;
+  z-index: 50;
+  width: 100%;
+  height: 100%;
+  @include flex;
+  
+  .nextLevelContainer {
+    width: 80%;
+    height: 80%;
+    @include flex;
+    flex-direction: column;
+    background: radial-gradient(circle, $light-blue, $dark-blue);
+    border-radius: 20px;
+    color: white;
+    @include gluten-font(300);
+
+    h2 {
+      font-size: 4vw;
+      margin: 20px;
+    }
+
+    #updateBoat {
+      border: 2px solid white;
+      border-radius: 10px;
+      padding: 10px 15px;
+      font-size: 2vw;
+      background-color: transparent;
+      color: white;
+      @include gluten-font(300);
+      transition: 0.5s ease-in-out;
+
+      &:hover {
+        background-color: white;
+        color: $light-blue;
+        cursor: pointer;
+      }
+    }
+
+    .newContinue {
+      @include flex;
+      gap: 20px;
+      margin-top: 20px;
+
+      #continue {
+        border: none;
+        border-radius: 10px;
+        padding: 10px 15px;
+        font-size: 2vw;
+        background-color: white;
+        color: $light-blue;
+        @include gluten-font(300);
+        transition: 0.5s ease-in-out;
+
+        &:hover {
+          background-color: $light-blue;
+          color: white;
+          cursor: pointer;
+        }
+      }
+      #newGame {
+        border: none;
+        border-radius: 10px;
+        padding: 10px 15px;
+        font-size: 2vw;
+        background-color: white;
+        color: $light-blue;
+        @include gluten-font(300);
+        transition: 0.5s ease-in-out;
+
+        &:hover {
+          background-color: $light-blue;
+          color: white;
+          cursor: pointer;
+        }
+      }
+    }
+  } 
+}

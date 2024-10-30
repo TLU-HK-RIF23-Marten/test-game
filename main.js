@@ -17,6 +17,10 @@ const upArrow = document.getElementById('upArrow');
 const downArrow = document.getElementById('downArrow');
 const leftArrow = document.getElementById('leftArrow');
 const rightArrow = document.getElementById('rightArrow');
+const nextLevelScreen = document.querySelector('.nextLevelScreen');
+const peopleSaved = document.querySelector('.peopleSaved');
+const moneyEarned = document.querySelector('.moneyEarned');
+const timesUp = document.querySelector('.timesUp');
 
 const boatImages = {
   parv: 'img/parv.png',
@@ -33,14 +37,25 @@ let timerInterval;
 let questionOneAnswered = false;
 let questionTwoAnswered = false;
 let correctAnswers = 0;
+let gameWon = false;
+nextLevelScreen.style.display = 'none';
+timesUp.style.display = 'none';
 
 // mängima asumisel, eemalda intro leht
 document.getElementById('play').addEventListener('click', () => {
-  intro.style.top = '-1000px';
+  intro.style.top = '-2000px';
 
   // Käivitame taimeri
   timerInterval = setInterval(updateTimer, 1000);
 });
+
+document.getElementById('newGame').addEventListener('click', () => {
+  resetGame();
+});
+
+document.getElementById('timeNewGame').addEventListener('click', () => {
+  resetGame();
+})
 
 // Taimeri käivitamine
 const updateTimer = () => {
@@ -51,8 +66,7 @@ const updateTimer = () => {
       document.getElementById('time').textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   } else {
       clearInterval(timerInterval); // Peatame taimeri, kui aeg otsas
-      alert('Aeg on läbi!');
-      resetGame();
+      timesUp.style.display = 'flex';
   }
 };
 
@@ -144,13 +158,21 @@ noTwo.addEventListener('click', () => {
 // Töötle vastust ja uuenda punkte
 const handleAnswer = (questionIndex, isCorrect) => {
   if (isCorrect) {
-      alert('Õige vastus! Teenisid 500 punkti!');
-      updatePoints(500); // Lisa punkte
-      correctAnswers++;
-      updateBoatImage();
+    alert('Õige vastus! Teenisid 500 eurot!');
+    updatePoints(500);
+    correctAnswers++;
+    updateBoatImage();
   } else {
-      alert('Vale vastus! Vale vastus maksab 500 punkti!');
-      updatePoints(-500); // Lahuta punkte
+    if (points >= 500) {
+      alert('Vale vastus! Vale vastus maksab 200 eurot!');
+      updatePoints(-200);
+    } else if (points < 500 && correctAnswers > 0) {
+      alert('Vale vastus! Kuna sul pole piisavalt raha, kaotad ühe inimese!');
+      correctAnswers--;
+      updateBoatImage();
+    } else {
+      alert('Vale vastus, kuna teil pole ei raha ega inimesi siis te ei kaota hetkel midagi.');
+    }
   }
 
   hideQuestion(questionIndex);
@@ -283,6 +305,7 @@ const updateLifeboatPosition = () => {
 
 // Võidu tingimuste kontroll
 const checkWinCondition = () => {
+    if (gameWon) return;
     const islandRect = island.getBoundingClientRect();
     const lifeboatRect = lifeboat.getBoundingClientRect();
 
@@ -297,14 +320,19 @@ const checkWinCondition = () => {
       clearInterval(timerInterval); // Peatame taimeri, kui mängija jõuab saarele
       
       updatePoints(1000);
-      alert(`Sa jõudsid saarele! Sinu lõpp-punktid on: ${points} punkti!`);
-      
-      resetGame();
+      nextLevelScreen.style.display = 'flex';
+      peopleSaved.textContent = `Päästetud inimesed: ${correctAnswers}`;
+      moneyEarned.textContent = `Kogutud raha: ${points} €`;
+
+      gameWon = true;
   }
 };
 
 // Mängu taaskäivitamine
 const resetGame = () => {
+  gameWon = false;
+  nextLevelScreen.style.display = 'none';
+  timesUp.style.display = 'none';
   time = 120;
   points = 0;
   correctAnswers = 0;
@@ -326,6 +354,8 @@ const resetGame = () => {
 
   questionOneAnswered = false;
   questionTwoAnswered = false;
+  questionOneIcon.style.display = 'block';
+  questionTwoIcon.style.display = 'block';
   document.querySelectorAll('.questionContainer').forEach(q => q.style.display = 'none');
 
   // Tühjendame lainete massiivi
