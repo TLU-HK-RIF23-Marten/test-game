@@ -88,6 +88,10 @@ window.addEventListener('resize', resizeCanvas);
 // Paadi asukoha uuendamine
 let lifeboatPosition = { x: canvas.width / 3, y: canvas.height / 2 };
 
+if (window.innerWidth <= 480) {
+  lifeboatPosition.y = canvas.height * 0.2; // Liigutame paadi 20% kõrgusele
+}
+
 const updateBoatImage = () => {
   if (correctAnswers === 0) {
     lifeboat.src = boatImages.parv;
@@ -309,7 +313,7 @@ const checkWinCondition = () => {
     const islandRect = island.getBoundingClientRect();
     const lifeboatRect = lifeboat.getBoundingClientRect();
 
-    const padding = 50;
+    const padding = 10;
 
     if (
       lifeboatRect.x < islandRect.x + islandRect.width - padding &&
@@ -347,6 +351,9 @@ const resetGame = () => {
 
   // Taastame paadi algse asukoha
   lifeboatPosition = { x: canvas.width / 3, y: canvas.height / 2 };
+  if (window.innerWidth <= 480) {
+    lifeboatPosition.y = canvas.height * 0.2; // Liigutame paadi 20% kõrgusele
+  }
   lifeboat.style.left = `${lifeboatPosition.x}px`;
   lifeboat.style.top = `${lifeboatPosition.y}px`;
 

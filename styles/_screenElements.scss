@@ -70,8 +70,6 @@
     #lifeboat {
       width: 50px;
       height: 80px;
-      top: 20%;
-      transform: translate(-10%, -10%);
     }
   }
 
@@ -79,20 +77,9 @@
     #lifeboat {
       width: 30px;
       height: 60px;
-      top: 20%;
-      transform: translate(-10%, -10%);
     }
   }
-
-  @media screen and (max-width: 320px) {
-    #lifeboat {
-      width: 30px;
-      height: 60px;
-      top: 10%;
-      left: 10%;
-      transform: translate(-10%, -10%);
-    }
-  }
+  
   
   #island {
     position: absolute;
@@ -121,22 +108,14 @@
     #island {
       width: 80px;
       height: 60px;
-      bottom: 50px;
-    }
-  }
-
-  @media screen and (max-width: 320px) {
-    #island {
-      width: 50px;
-      height: 40px;
-      right: 20px;
+      bottom: 250px;
     }
   }
 
   .controls {
     position: absolute;
     z-index: 15;
-    bottom: 80px;
+    bottom: 60px;
     padding-bottom: 20px;
     @include flex;
     flex-direction: column;

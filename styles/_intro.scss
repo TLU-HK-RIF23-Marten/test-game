@@ -11,6 +11,7 @@
   transition: 1.5s ease-in-out;
 
   .videoBackground {
+    display: none;
     position: absolute;
     top: 0;
     left: 0;
@@ -42,19 +43,56 @@
     @include gluten-font(300);
     color: white;
     background-color: rgba(0, 0, 0, 0.74);
-    font-size: 2.2vw;
 
     h1 {
-      font-size: 4vw;
+      font-size: 50px;
+    }
+    
+    @media screen and (max-width:768px) {
+      h1 {
+        font-size: 20px;
+      }
+    }
+
+    .playContainerText {
+      font-size: 30px;
+      text-wrap: wrap;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    @media screen and (max-width:768px) {
+      .playContainerText {
+        font-size: 15px;
+      }
     }
 
     .questionText {
       @include flex;
       gap: 10px;
 
+      p {
+        font-size: 30px;
+        text-align: center;
+        line-height: 1.5;
+      }
+
+      @media screen and (max-width:768px) {
+        p {
+          font-size: 15px;
+        }
+      }
+
       img {
-        width: 4vw;
-        height: 4vw;
+        width: 50px;
+        height: 50px;
+      }
+
+      @media screen and (max-width:768px) {
+        img {
+          width: 25px;
+          height: 25px;
+        }
       }
     }
 
@@ -63,8 +101,26 @@
       gap: 20px;
 
       img {
-        width: 6vw;
-        height: 4.5vw;
+        width: 70px;
+        height: 50px;
+      }
+
+      @media screen and (max-width:768px) {
+        img {
+          width: 50px;
+          height: 40px;
+        }
+      }
+
+      p {
+        font-size: 30px;
+        line-height: 1.5;
+      }
+
+      @media screen and (max-width:768px) {
+        p {
+          font-size: 15px;
+        }
       }
     }
 
@@ -74,8 +130,8 @@
       background-color: white;
       color: $light-blue;
       border: none;
-      border-radius: 20px;
-      font-size: 3vw;
+      border-radius: 10px;
+      font-size: 30px;
       box-shadow: 10px 5px 10px rgba(0, 0, 0, 0.404);
       cursor: pointer;
       transition: 0.5s;
@@ -83,6 +139,13 @@
       &:hover {
         background-color: $light-blue;
         color: white;
+      }
+    }
+
+    @media screen and (max-width:768px) {
+      #play {
+        padding: 10px 20px;
+        font-size: 15px;
       }
     }
   }

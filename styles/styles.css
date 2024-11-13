@@ -68,25 +68,12 @@
   .game #lifeboat {
     width: 50px;
     height: 80px;
-    top: 20%;
-    transform: translate(-10%, -10%);
   }
 }
 @media screen and (max-width: 480px) {
   .game #lifeboat {
     width: 30px;
     height: 60px;
-    top: 20%;
-    transform: translate(-10%, -10%);
-  }
-}
-@media screen and (max-width: 320px) {
-  .game #lifeboat {
-    width: 30px;
-    height: 60px;
-    top: 10%;
-    left: 10%;
-    transform: translate(-10%, -10%);
   }
 }
 .game #island {
@@ -113,20 +100,13 @@
   .game #island {
     width: 80px;
     height: 60px;
-    bottom: 50px;
-  }
-}
-@media screen and (max-width: 320px) {
-  .game #island {
-    width: 50px;
-    height: 40px;
-    right: 20px;
+    bottom: 250px;
   }
 }
 .game .controls {
   position: absolute;
   z-index: 15;
-  bottom: 80px;
+  bottom: 60px;
   padding-bottom: 20px;
   display: flex;
   justify-content: center;
@@ -214,19 +194,14 @@
   #questionOneIcon {
     width: 30px;
     height: 30px;
+    top: 40px;
+    left: 40px;
   }
 }
 @media screen and (max-width: 480px) {
   #questionOneIcon {
     width: 30px;
     height: 30px;
-  }
-}
-@media screen and (max-width: 320px) {
-  #questionOneIcon {
-    width: 20px;
-    height: 20px;
-    top: 20px;
   }
 }
 #questionTwoIcon {
@@ -254,14 +229,8 @@
   #questionTwoIcon {
     width: 30px;
     height: 30px;
-    left: 50px;
-  }
-}
-@media screen and (max-width: 320px) {
-  #questionTwoIcon {
-    width: 20px;
-    height: 20px;
-    left: 100px;
+    left: 250px;
+    top: 100px;
   }
 }
 .questionContainer {
@@ -279,12 +248,11 @@
   font-weight: 300;
   font-style: normal;
   font-variation-settings: "slnt" 0;
-  line-height: 25px;
 }
 .questionContainer .questionBox {
-  width: 50%;
-  height: 50%;
-  border-radius: 20px;
+  width: 450px;
+  height: 450px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -292,8 +260,10 @@
   background-color: white;
 }
 .questionContainer .questionBox p {
-  padding: 50px;
-  font-size: 20px;
+  padding: 0 50px;
+  font-size: 30px;
+  line-height: 1.5;
+  text-align: center;
 }
 .questionContainer .questionBox .answerBox {
   width: 100%;
@@ -307,26 +277,33 @@
   color: white;
   border: none;
   border-radius: 10px;
-  font-size: 20px;
+  font-size: 30px;
   cursor: pointer;
   transition: 0.5s;
 }
 .questionContainer .questionBox .answerBox #yesOne:hover, .questionContainer .questionBox .answerBox #yesTwo:hover {
   background-color: #125a24;
 }
-@media screen and (max-width: 1024px) {
-  .questionContainer .questionBox {
-    width: 70%;
-    height: 70%;
+.questionContainer .questionBox .answerBox #noOne, .questionContainer .questionBox .answerBox #noTwo {
+  padding: 10px 20px;
+  background-color: #b81e1e;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 30px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.questionContainer .questionBox .answerBox #noOne:hover, .questionContainer .questionBox .answerBox #noTwo:hover {
+  background-color: #6a0f0f;
+}
+@media screen and (max-width: 480px) {
+  .questionContainer .questionBox .answerBox #yesOne, .questionContainer .questionBox .answerBox #yesTwo, .questionContainer .questionBox .answerBox #noOne, .questionContainer .questionBox .answerBox #noTwo {
+    font-size: 15px;
   }
 }
 @media screen and (max-width: 768px) {
-  .questionContainer .questionBox {
-    width: 90%;
-    height: 90%;
-  }
-  .questionContainer .questionBox p, .questionContainer #yesOne, .questionContainer #yesTwo, .questionContainer #noOne, .questionContainer #noTwo {
-    font-size: 16px;
+  .questionContainer .questionBox p {
     padding: 10px 20px;
   }
 }
@@ -335,34 +312,12 @@
     width: 100%;
     height: 100%;
     border-radius: 0;
+    justify-content: center;
+    gap: 100px;
   }
-  .questionContainer .questionBox p, .questionContainer #yesOne, .questionContainer #yesTwo, .questionContainer #noOne, .questionContainer #noTwo {
-    font-size: 14px;
+  .questionContainer .questionBox p {
+    font-size: 15px;
   }
-}
-@media screen and (max-width: 320px) {
-  .questionContainer .questionBox {
-    width: 100%;
-    height: 100%;
-    border-radius: 0;
-  }
-  .questionContainer .questionBox p, .questionContainer #yesOne, .questionContainer #yesTwo, .questionContainer #noOne, .questionContainer #noTwo {
-    font-size: 12px;
-  }
-}
-
-#noOne, #noTwo {
-  padding: 10px 20px;
-  background-color: #b81e1e;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 20px;
-  cursor: pointer;
-  transition: 0.5s;
-}
-#noOne:hover, #noTwo:hover {
-  background-color: #6a0f0f;
 }
 
 #letsPlay {
@@ -376,6 +331,7 @@
   transition: 1.5s ease-in-out;
 }
 #letsPlay .videoBackground {
+  display: none;
   position: absolute;
   top: 0;
   left: 0;
@@ -412,10 +368,25 @@
   font-variation-settings: "slnt" 0;
   color: white;
   background-color: rgba(0, 0, 0, 0.74);
-  font-size: 2.2vw;
 }
 #letsPlay .playContainer h1 {
-  font-size: 4vw;
+  font-size: 50px;
+}
+@media screen and (max-width: 768px) {
+  #letsPlay .playContainer h1 {
+    font-size: 20px;
+  }
+}
+#letsPlay .playContainer .playContainerText {
+  font-size: 30px;
+  text-wrap: wrap;
+  line-height: 1.5;
+  text-align: center;
+}
+@media screen and (max-width: 768px) {
+  #letsPlay .playContainer .playContainerText {
+    font-size: 15px;
+  }
 }
 #letsPlay .playContainer .questionText {
   display: flex;
@@ -423,9 +394,25 @@
   align-items: center;
   gap: 10px;
 }
+#letsPlay .playContainer .questionText p {
+  font-size: 30px;
+  text-align: center;
+  line-height: 1.5;
+}
+@media screen and (max-width: 768px) {
+  #letsPlay .playContainer .questionText p {
+    font-size: 15px;
+  }
+}
 #letsPlay .playContainer .questionText img {
-  width: 4vw;
-  height: 4vw;
+  width: 50px;
+  height: 50px;
+}
+@media screen and (max-width: 768px) {
+  #letsPlay .playContainer .questionText img {
+    width: 25px;
+    height: 25px;
+  }
 }
 #letsPlay .playContainer .arrow {
   display: flex;
@@ -434,8 +421,23 @@
   gap: 20px;
 }
 #letsPlay .playContainer .arrow img {
-  width: 6vw;
-  height: 4.5vw;
+  width: 70px;
+  height: 50px;
+}
+@media screen and (max-width: 768px) {
+  #letsPlay .playContainer .arrow img {
+    width: 50px;
+    height: 40px;
+  }
+}
+#letsPlay .playContainer .arrow p {
+  font-size: 30px;
+  line-height: 1.5;
+}
+@media screen and (max-width: 768px) {
+  #letsPlay .playContainer .arrow p {
+    font-size: 15px;
+  }
 }
 #letsPlay .playContainer #play {
   margin: 50px;
@@ -443,8 +445,8 @@
   background-color: white;
   color: #2989a7;
   border: none;
-  border-radius: 20px;
-  font-size: 3vw;
+  border-radius: 10px;
+  font-size: 30px;
   box-shadow: 10px 5px 10px rgba(0, 0, 0, 0.404);
   cursor: pointer;
   transition: 0.5s;
@@ -452,6 +454,12 @@
 #letsPlay .playContainer #play:hover {
   background-color: #2989a7;
   color: white;
+}
+@media screen and (max-width: 768px) {
+  #letsPlay .playContainer #play {
+    padding: 10px 20px;
+    font-size: 15px;
+  }
 }
 
 .nextLevelScreen {
@@ -471,7 +479,7 @@
   align-items: center;
   flex-direction: column;
   background: radial-gradient(circle, #2989a7, #274d6d);
-  border-radius: 20px;
+  border-radius: 10px;
   color: white;
   font-family: "Gluten", serif;
   font-optical-sizing: auto;
@@ -480,14 +488,14 @@
   font-variation-settings: "slnt" 0;
 }
 .nextLevelScreen .nextLevelContainer h2 {
-  font-size: 4vw;
+  font-size: 30px;
   margin: 20px;
 }
 .nextLevelScreen .nextLevelContainer #updateBoat {
   border: 2px solid white;
   border-radius: 10px;
   padding: 10px 15px;
-  font-size: 2vw;
+  font-size: 30px;
   background-color: transparent;
   color: white;
   font-family: "Gluten", serif;
@@ -502,6 +510,11 @@
   color: #2989a7;
   cursor: pointer;
 }
+@media screen and (max-width: 480px) {
+  .nextLevelScreen .nextLevelContainer #updateBoat {
+    font-size: 15px;
+  }
+}
 .nextLevelScreen .nextLevelContainer .newContinue {
   display: flex;
   justify-content: center;
@@ -513,7 +526,7 @@
   border: none;
   border-radius: 10px;
   padding: 10px 15px;
-  font-size: 2vw;
+  font-size: 30px;
   background-color: white;
   color: #2989a7;
   font-family: "Gluten", serif;
@@ -528,11 +541,16 @@
   color: white;
   cursor: pointer;
 }
+@media screen and (max-width: 480px) {
+  .nextLevelScreen .nextLevelContainer .newContinue #continue {
+    font-size: 15px;
+  }
+}
 .nextLevelScreen .nextLevelContainer .newContinue #newGame {
   border: none;
   border-radius: 10px;
   padding: 10px 15px;
-  font-size: 2vw;
+  font-size: 30px;
   background-color: white;
   color: #2989a7;
   font-family: "Gluten", serif;
@@ -546,6 +564,17 @@
   background-color: #2989a7;
   color: white;
   cursor: pointer;
+}
+@media screen and (max-width: 480px) {
+  .nextLevelScreen .nextLevelContainer .newContinue #newGame {
+    font-size: 15px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .nextLevelScreen .nextLevelContainer {
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .timesUp {

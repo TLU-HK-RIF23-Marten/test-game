@@ -70,6 +70,8 @@
   #questionOneIcon {
     width: 30px;
     height: 30px;
+    top: 40px;
+    left: 40px;
   }
 }
 
@@ -77,14 +79,6 @@
   #questionOneIcon {
     width: 30px;
     height: 30px;
-  }
-}
-
-@media screen and (max-width: 320px) {
-  #questionOneIcon {
-    width: 20px;
-    height: 20px;
-    top: 20px;
   }
 }
 
@@ -115,15 +109,8 @@
   #questionTwoIcon {
     width: 30px;
     height: 30px;
-    left: 50px;
-  }
-}
-
-@media screen and (max-width: 320px) {
-  #questionTwoIcon {
-    width: 20px;
-    height: 20px;
-    left: 100px;
+    left: 250px;
+    top: 100px;
   }
 }
 
@@ -138,12 +125,11 @@
   height: 100%;
   background-color: #298aa7e0;
   @include gluten-font(300);
-  line-height: 25px;
 
   .questionBox {
-    width: 50%;
-    height: 50%;
-    border-radius: 20px;
+    width: 450px;
+    height: 450px;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -151,8 +137,10 @@
     background-color: white;
 
     p {
-      padding: 50px;
-      font-size: 20px;
+      padding: 0 50px;
+      font-size: 30px;
+      line-height: 1.5;
+      text-align: center;
     }
 
     .answerBox {
@@ -167,7 +155,7 @@
         color: white;
         border: none;
         border-radius: 10px;
-        font-size: 20px;
+        font-size: 30px;
         cursor: pointer;
         transition: 0.5s;
 
@@ -175,23 +163,31 @@
           background-color: #125a24;
         }
       }
-    }
-  }
+      #noOne, #noTwo {
+        padding: 10px 20px;
+        background-color: #b81e1e;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 30px;
+        cursor: pointer;
+        transition: 0.5s;
+      
+        &:hover {
+          background-color: #6a0f0f;
+        }
+      }
 
-  @media screen and (max-width: 1024px) {
-    .questionBox {
-      width: 70%;
-      height: 70%;
+      @media screen and (max-width: 480px) {
+        #yesOne, #yesTwo, #noOne, #noTwo {
+          font-size: 15px;
+        }
+      }
     }
   }
 
   @media screen and (max-width: 768px) {
-    .questionBox {
-      width: 90%;
-      height: 90%;
-    }
-    .questionBox p, #yesOne, #yesTwo, #noOne, #noTwo {
-      font-size: 16px;
+    .questionBox p {
       padding: 10px 20px;
     }
   }
@@ -201,36 +197,11 @@
       width: 100%;
       height: 100%;
       border-radius: 0;
+      justify-content: center;
+      gap: 100px;
     }
-    .questionBox p, #yesOne, #yesTwo, #noOne, #noTwo {
-      font-size: 14px;
+    .questionBox p {
+      font-size: 15px;
     }
-  }
-
-  @media screen and (max-width: 320px) {
-    .questionBox {
-      width: 100%;
-      height: 100%;
-      border-radius: 0;
-    }
-    .questionBox p, #yesOne, #yesTwo, #noOne, #noTwo {
-      font-size: 12px;
-    }
-  }
-}
-
-
-#noOne, #noTwo {
-  padding: 10px 20px;
-  background-color: #b81e1e;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 20px;
-  cursor: pointer;
-  transition: 0.5s;
-
-  &:hover {
-    background-color: #6a0f0f;
   }
 }
