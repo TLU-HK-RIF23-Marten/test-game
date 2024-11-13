@@ -331,7 +331,6 @@
   transition: 1.5s ease-in-out;
 }
 #letsPlay .videoBackground {
-  display: none;
   position: absolute;
   top: 0;
   left: 0;
